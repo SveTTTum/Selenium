@@ -7,13 +7,13 @@ import org.openqa.selenium.support.FindBy;
 
 public class PastebinResultPage extends AbstractPage{
 
+    By browserPageTitle = By.xpath("//div[@class='info-top']/h1");
+    By syntax = By.xpath("//div[@class='left']/a");
+    By codeResult = By.xpath("//div[@class='post-view']/textarea[@class='textarea']");
+
     public PastebinResultPage(WebDriver driver) {
         super(driver);
     }
-
-    By browserPageTitle = By.xpath("//div[@class='info-top']/h1");
-    By syntax = By.xpath("//div[@class='left']/a[text()='Bash']");
-    By codeResult = By.xpath("//div[@class='post-view']/textarea[@class='textarea']");
 
     public String headerOfPageResult(){
         return driver.findElement(browserPageTitle).getText();

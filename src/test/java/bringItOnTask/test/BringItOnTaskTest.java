@@ -55,8 +55,6 @@ public class BringItOnTaskTest extends AbstractTest{
                 .pasteName(name)
                 .saveResults()
                 .codeOfPageResult();
-        System.out.println(codeResultPage);
-        System.out.println(code);
         Assert.assertEquals(codeResultPage, code);
     }
 
