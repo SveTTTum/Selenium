@@ -8,7 +8,7 @@ public class PastebinHomePage extends AbstractPage{
 
     private static final String HOMEPAGE_URL = "https://pastebin.com/";
 
-    @FindBy(id = "postform-text")
+    @FindBy(xpath = "//*[@id = 'postform-text']")
     private WebElement inputText;
 
     @FindBy(xpath = "//span[@class='select2-selection__arrow']")

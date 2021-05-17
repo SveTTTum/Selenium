@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
 public class BringItOnTaskTest extends AbstractTest{
     private WebDriver driver;
     String code = "git config --global user.name  \"New Sheriff in Town\"\n" +
-                "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
-                "git push origin master --force\n";
+            "git reset $(git commit-tree HEAD^{tree} -m \"Legacy code\")\n" +
+            "git push origin master --force";
     String name = "how to gain dominance among developers";
 
 
@@ -45,7 +45,7 @@ public class BringItOnTaskTest extends AbstractTest{
                 .chooseSyntaxBash()
                 .saveResults()
                 .syntaxOfPageResult();
-        Assert.assertEquals(syntaxResultPage, "Bush");
+        Assert.assertEquals(syntaxResultPage, "Bash");
     }
 
     @Test()
@@ -55,6 +55,8 @@ public class BringItOnTaskTest extends AbstractTest{
                 .pasteName(name)
                 .saveResults()
                 .codeOfPageResult();
+        System.out.println(codeResultPage);
+        System.out.println(code);
         Assert.assertEquals(codeResultPage, code);
     }
 
