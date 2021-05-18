@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class PastebinHomePage extends AbstractPage{
+public class PastebinHomePage extends AbstractPage {
 
     private static final String HOMEPAGE_URL = "https://pastebin.com/";
 
@@ -17,16 +17,16 @@ public class PastebinHomePage extends AbstractPage{
     @FindBy(xpath = "//ul[@class='select2-results__options select2-results__options--nested']//li[contains(text(), 'Bash')]")
     private WebElement chooseSyntax;
 
-    @FindBy(xpath ="//div[@class='form-group field-postform-expiration']//span[@class='select2-selection__arrow']")
+    @FindBy(xpath = "//div[@class='form-group field-postform-expiration']//span[@class='select2-selection__arrow']")
     private WebElement buttonExpiration;
 
-    @FindBy(xpath ="//span[@class='select2-results']//li[contains(text(), '10 Minutes')]")
+    @FindBy(xpath = "//span[@class='select2-results']//li[contains(text(), '10 Minutes')]")
     private WebElement chooseExpiration;
 
     @FindBy(id = "postform-name")
     private WebElement inputName;
 
-    @FindBy(xpath ="//button[@class='btn -big']")
+    @FindBy(xpath = "//button[@class='btn -big']")
     private WebElement buttonCreateNewPaste;
 
     public PastebinHomePage(WebDriver driver) {
@@ -38,7 +38,7 @@ public class PastebinHomePage extends AbstractPage{
         return this;
     }
 
-    public PastebinHomePage inputCodeInNewPaste (String code) {
+    public PastebinHomePage inputCodeInNewPaste(String code) {
         inputText.sendKeys(code);
         return this;
     }
@@ -55,7 +55,7 @@ public class PastebinHomePage extends AbstractPage{
         return this;
     }
 
-    public PastebinHomePage pasteName (String name) {
+    public PastebinHomePage pasteName(String name) {
         inputName.sendKeys(name);
         return this;
     }

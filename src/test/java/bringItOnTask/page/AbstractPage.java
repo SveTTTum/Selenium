@@ -9,12 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractPage {
     WebDriver driver;
-    AbstractPage (WebDriver driver) {
-        this.driver=driver;
+
+    AbstractPage(WebDriver driver) {
+        this.driver = driver;
         PageFactory.initElements(driver, this);
     }
 
-    private static WebElement waitForElementLocatedBy (WebDriver driver, By way) {
-        return new WebDriverWait(driver, 10).until(ExpectedConditions.presenceOfElementLocated(way));
+    public static WebElement waitForElementLocatedBy(WebDriver driver, By way) {
+        return new WebDriverWait(driver, 5).until(ExpectedConditions.presenceOfElementLocated(way));
     }
 }
