@@ -9,16 +9,13 @@ import org.testng.annotations.BeforeMethod;
 import java.util.concurrent.TimeUnit;
 
 public class AbstractTest {
-    private WebDriver driver;
-    protected CloudGoogleHomePage pageHome;
-    //protected PastebinResultPage pageResult;
+    WebDriver driver;
 
     @BeforeMethod(alwaysRun = true)
     public void browserSetup() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        //driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        pageHome = new CloudGoogleHomePage(driver);
 
     }
 

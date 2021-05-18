@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class CloudGoogleHomePage extends AbstractPage {
+
     private static final String HOMEPAGE_URL = "https://cloud.google.com/";
 
     @FindBy(xpath = "//div[@class='devsite-search-container']")
@@ -14,8 +15,9 @@ public class CloudGoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//input[@class='devsite-search-field devsite-search-query']")
     private WebElement stringForSearch;
 
-    @FindBy(xpath = "//b[text()='Google Cloud Platform Pricing Calculator']/parent::a[@class='gs-title']")
-    private WebElement linkCalculatorPage;
+    //не нашло (
+    @FindBy(xpath = "//div[@id='devsite-suggest-header-product']/ancestor::div[contains(@class, 'devsite-suggest-sub-section')]//a")
+    private WebElement linkForSearchCalculator;
 
     public CloudGoogleHomePage(WebDriver driver) {
         super(driver);
@@ -26,11 +28,12 @@ public class CloudGoogleHomePage extends AbstractPage {
         return this;
     }
 
-    public CalculatorPage getSearchResults(String text) {
+    public CloudGoogleResultPage getSearchResults(String text) {
         buttonSearch.click();
         stringForSearch.sendKeys(text + Keys.ENTER);
-        linkCalculatorPage.click();
-        return new CalculatorPage(driver);
+//        stringForSearch.sendKeys(text);
+//        linkForSearchCalculator.click();
+        return new CloudGoogleResultPage(driver);
     }
 
 
