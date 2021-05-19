@@ -16,7 +16,18 @@ public class HurtMePlentyTest extends AbstractTest {
                 .openPage()
                 .getSearchResults(textForSearchCalculator)
                 .getPage()
-                .activateComputeEngine();
+                .activateComputeEngine()
+                .fillInstances("4")
+                .chooseInstancesFor("")
+                .chooseOperatingSystemOrSoftware()
+                .chooseMachineClass()
+                .chooseSeries()
+                .chooseMachineType()
+                .fillAllFieldsGPUs()
+                .chooseLocalSSD()
+                .chooseDatacenterLocation()
+                .chooseCommitedUsage()
+                .clickButtonAddToEstimate();
     }
 
 }

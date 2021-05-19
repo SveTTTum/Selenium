@@ -9,12 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CloudGoogleResultPage extends AbstractPage{
 
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait = new WebDriverWait(driver, 5);
 
-    @FindBy(xpath = "//b[text()='Google Cloud Platform Pricing Calculator']/parent::a[@class='gs-title']")
-    By linkCalculatorPageBy = By.xpath("//b[text()='Google Cloud Platform Pricing Calculator']/parent::a[@class='gs-title']");
-    private WebElement linkCalculatorPage;
-//
+    By linkCalculatorPageBy = By.xpath("//div[@class='gs-title']/a[@class='gs-title' and @href='https://cloud.google.com/products/calculator']");
+
     CloudGoogleResultPage(WebDriver driver) {
         super(driver);
     }
