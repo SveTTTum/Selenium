@@ -3,7 +3,6 @@ package hurtMePlentyTask.page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -37,6 +36,12 @@ public class CalculatorPage extends AbstractPage{
     private By datacenterLocation = By.xpath(String.format(xpathElementOfField, 212));
     private By commitedUsage = By.xpath(String.format(xpathElementOfField, 100));
     private By buttonForAddToEstimate = By.xpath("//form[@class='ng-scope ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-valid ng-valid-required ng-valid-parse']/div[15]/button");
+    private By vmClassResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'VM class: ')]");
+    private By InstanceTypeResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']//div[contains(text(), 'Instance type: ')]");
+    private By regionResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']//div[contains(text(), 'Region: ')]");
+    private By localSSDResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Total available local SSD space ')]");
+    private By commitmentTermResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Commitment term: ')]");
+    private By estimatedComponentCostResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']/div[@class='md-list-item-text']/b");
 
     public CalculatorPage (WebDriver driver) {
         super(driver);
@@ -126,9 +131,27 @@ public class CalculatorPage extends AbstractPage{
         return this;
     }
 
-    //8. Проверить соответствие данных следующих полей: VM Class, Instance type, Region, local SSD, commitment term
-    //9. Проверить что сумма аренды в месяц совпадает с суммой получаемой при ручном прохождении теста.
+    public String getVMClassResult() {
+        return driver.findElement(vmClassResultBy).getText();
+    }
 
+    public String getInstanceType() {
+        return driver.findElement(InstanceTypeResultBy).getText();
+    }
 
+    public String getRegion() {
+        return driver.findElement(regionResultBy).getText();
+    }
+
+    public String getLocalSSD() {
+        return driver.findElement(localSSDResultBy).getText();
+    }
+    public String getCommitmentTerm() {
+        return driver.findElement(commitmentTermResultBy).getText();
+    }
+
+    public String getEstimatedComponentCost() {
+        return driver.findElement(estimatedComponentCostResultBy).getText();
+    }
 
 }
