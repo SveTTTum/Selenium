@@ -61,6 +61,7 @@ public class CalculatorPage extends AbstractPage{
     private By localSSDResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Total available local SSD space ')]");
     private By commitmentTermResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Commitment term: ')]");
     private By estimatedComponentCostResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']/div[@class='md-list-item-text']/b");
+    private By totalEstimatedMonthlyCost = By.xpath("//tr[@id='mobilepadding']//td[2]/h3");
 
     public CalculatorPage (WebDriver driver) {
         super(driver);
@@ -212,5 +213,11 @@ public class CalculatorPage extends AbstractPage{
         wait.until(ExpectedConditions.elementToBeClickable(buttonOpenLetter)).click();
         return this;
     }
+
+    public CalculatorPage getTotalSumFromLetter() {
+        driver.findElement(totalEstimatedMonthlyCost).getText();
+        return this;
+    }
+
 
 }

@@ -39,5 +39,6 @@ public class HurtMePlentyTest extends AbstractTest {
 
         pageHome.sendEmail()
                 .openLetter();
+        softAssert.assertTrue(pageHome.getEstimatedComponentCost().contains((CharSequence) pageHome.getTotalSumFromLetter()));
     }
 }
