@@ -27,6 +27,7 @@ public class HurtMePlentyTest extends AbstractTest {
                 .chooseDatacenterLocation()
                 .chooseCommitedUsage()
                 .clickButtonAddToEstimate();
+
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(pageHome.getVMClassResult(), "VM class: regular");
         softAssert.assertEquals(pageHome.getInstanceType(), "Instance type: n1-standard-8");
@@ -35,5 +36,7 @@ public class HurtMePlentyTest extends AbstractTest {
         softAssert.assertEquals(pageHome.getCommitmentTerm(), "Commitment term: 1 Year");
         softAssert.assertEquals(pageHome.getEstimatedComponentCost(), "Estimated Component Cost: USD 1,082.77 per 1 month");
         softAssert.assertAll();
+
+        pageHome.sendEmail();
     }
 }

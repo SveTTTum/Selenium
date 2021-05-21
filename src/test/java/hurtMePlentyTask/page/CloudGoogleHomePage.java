@@ -17,8 +17,6 @@ public class CloudGoogleHomePage extends AbstractPage {
     @FindBy(xpath = "//input[@class='devsite-search-field devsite-search-query']")
     private WebElement stringForSearch;
 
-    //By linkForSearchCalculator = By.xpath("//div[@id='suggestion-product-0']/a");
-
     public CloudGoogleHomePage(WebDriver driver) {
         super(driver);
     }
@@ -36,6 +34,7 @@ public class CloudGoogleHomePage extends AbstractPage {
 
     //или можно сразу выбрать нужную страницу Calculator
 //    public CalculatorPage getSearchResults(String text) {
+//        By linkForSearchCalculator = By.xpath("//div[@id='suggestion-product-0']/a");
 //        buttonSearch.click();
 //        stringForSearch.sendKeys(text);
 //        wait.until(ExpectedConditions.presenceOfElementLocated(linkForSearchCalculator)).click();

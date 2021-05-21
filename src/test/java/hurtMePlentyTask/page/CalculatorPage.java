@@ -1,11 +1,15 @@
 package hurtMePlentyTask.page;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 public class CalculatorPage extends AbstractPage{
     WebDriverWait wait = new WebDriverWait(driver, 20);
@@ -21,6 +25,18 @@ public class CalculatorPage extends AbstractPage{
 
     @FindBy(xpath = "//md-checkbox[@ng-model='listingCtrl.computeServer.addGPUs']/div[@class='md-container md-ink-ripple']")
     private WebElement addGPUs;
+
+    @FindBy(xpath = "//md-card-content[@id='resultBlock']//button[@id='email_quote']")
+    WebElement buttonEmailEstimate;
+
+    @FindBy(xpath = "//div[@class='md-dialog-container ng-scope']//md-input-container//label[contains(text(), 'Email')]//following-sibling::input")
+    WebElement fieldForEmail;
+
+    @FindBy(xpath = "//md-dialog-actions[@class='layout-row']//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple']")
+    WebElement buttonSendEmail;
+
+    @FindBy(xpath = "//input[@id='mail_address']")
+    WebElement emailBy;
 
     String xpathfield = "//md-select-value[@id='select_value_label_%s']";
     String xpathElementOfField = "//md-option[@id='select_option_%s']//child::div";
@@ -153,5 +169,37 @@ public class CalculatorPage extends AbstractPage{
     public String getEstimatedComponentCost() {
         return driver.findElement(estimatedComponentCostResultBy).getText();
     }
+
+    //8. Выбрать пункт EMAIL ESTIMATE
+    //9. В новой вкладке открыть https://10minutemail.com или аналогичный сервис для генерации временных email'ов
+    //10. Скопировать почтовый адрес сгенерированный в 10minutemail
+    //11. Вернуться в калькулятор, в поле Email ввести адрес из предыдущего пункта
+    //12. Нажать SEND EMAIL
+
+    public CalculatorPage sendEmail() {
+        ((JavascriptExecutor)driver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        driver.get("https://10minutemail.com/");
+        driver.findElement(By.xpath("//div[@id='copy_address']/span")).click();
+        driver.switchTo().window(tabs.get(0));
+        WebElement firstFrameBy = driver.findElement(firstFrame);
+        driver.switchTo().frame(firstFrameBy);
+        driver.switchTo().frame("myFrame");
+        wait.until(ExpectedConditions.elementToBeClickable(buttonEmailEstimate)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(fieldForEmail)).click();
+        try {
+            String email = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
+            fieldForEmail.sendKeys(email);
+        } catch (UnsupportedFlavorException | IOException e) {
+            e.printStackTrace();
+        }
+        wait.until(ExpectedConditions.elementToBeClickable(buttonSendEmail)).click();
+        return this;
+    }
+
+    //13. Дождаться письма с рассчетом стоимости и
+    // проверить что Total Estimated Monthly Cost в письме совпадает с тем, что отображается в калькуляторе
+
 
 }

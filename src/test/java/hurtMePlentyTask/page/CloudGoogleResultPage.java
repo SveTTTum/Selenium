@@ -9,7 +9,7 @@ public class CloudGoogleResultPage extends AbstractPage{
 
     WebDriverWait wait = new WebDriverWait(driver, 5);
 
-    By linkCalculatorPageBy = By.xpath("//div[@class='gs-title']/a[@class='gs-title' and @href='https://cloud.google.com/products/calculator']");
+    private final By linkCalculatorPageBy = By.xpath("//div[@class='gs-title']/a[@class='gs-title' and @href='https://cloud.google.com/products/calculator']");
 
     CloudGoogleResultPage(WebDriver driver) {
         super(driver);
