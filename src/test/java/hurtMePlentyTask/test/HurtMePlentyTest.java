@@ -37,6 +37,7 @@ public class HurtMePlentyTest extends AbstractTest {
         softAssert.assertEquals(pageHome.getEstimatedComponentCost(), "Estimated Component Cost: USD 1,082.77 per 1 month");
         softAssert.assertAll();
 
-        pageHome.sendEmail();
+        pageHome.sendEmail()
+                .openLetter();
     }
 }

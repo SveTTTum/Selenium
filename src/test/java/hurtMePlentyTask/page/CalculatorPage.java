@@ -38,6 +38,9 @@ public class CalculatorPage extends AbstractPage{
     @FindBy(xpath = "//input[@id='mail_address']")
     WebElement emailBy;
 
+    @FindBy(xpath = "//div[@class='message_top']")
+    WebElement buttonOpenLetter;
+
     String xpathfield = "//md-select-value[@id='select_value_label_%s']";
     String xpathElementOfField = "//md-option[@id='select_option_%s']//child::div";
 
@@ -201,5 +204,13 @@ public class CalculatorPage extends AbstractPage{
     //13. Дождаться письма с рассчетом стоимости и
     // проверить что Total Estimated Monthly Cost в письме совпадает с тем, что отображается в калькуляторе
 
+    public CalculatorPage openLetter() {
+        By quantityLettersBy = By.xpath("//span[@id='inbox_count_number']");
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+        wait.until(ExpectedConditions.textToBe(quantityLettersBy, "1"));
+        wait.until(ExpectedConditions.elementToBeClickable(buttonOpenLetter)).click();
+        return this;
+    }
 
 }
