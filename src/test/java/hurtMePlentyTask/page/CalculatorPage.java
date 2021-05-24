@@ -1,25 +1,19 @@
 package hurtMePlentyTask.page;
 
-import org.openqa.selenium.*;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.awt.*;
-import java.awt.datatransfer.DataFlavor;
-import java.awt.datatransfer.UnsupportedFlavorException;
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class CalculatorPage extends AbstractPage{
-    WebDriverWait wait = new WebDriverWait(driver, 20);
+public class CalculatorPage extends AbstractPage {
 
     @FindBy(xpath = "//md-tab-item[@class='md-tab ng-scope ng-isolate-scope md-ink-ripple md-active']//descendant::div[@class='hexagon-in2']")
     private WebElement buttonActivateComputeEngine;
     @FindBy(xpath = "//md-input-container/child::input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement selectInstances;
     @FindBy(xpath = "//input[@id='input_67']")
-    private  WebElement fieldInstancesFor;
+    private WebElement fieldInstancesFor;
     @FindBy(xpath = "//md-checkbox[@ng-model='listingCtrl.computeServer.addGPUs']/div[@class='md-container md-ink-ripple']")
     private WebElement addGPUs;
     @FindBy(xpath = "//md-card-content[@id='resultBlock']//button[@id='email_quote']")
@@ -65,15 +59,16 @@ public class CalculatorPage extends AbstractPage{
 
     String xpathElementOfField = "//div[contains(@class, 'md-select-menu-container md-active')]//div[contains(@class, 'md-text') and contains(text(), '%s')]";
 
-    private By firstFrame = By.xpath("//iframe[starts-with(@name, 'goog_')]");
+    private final By firstFrame = By.xpath("//iframe[starts-with(@name, 'goog_')]");
+    private final By secondFrame = By.xpath("//iframe[@id='myFrame']");
 
-    public CalculatorPage (WebDriver driver) {
+    public CalculatorPage(WebDriver driver) {
         super(driver);
     }
 
     public CalculatorPage goToCalculatorFrame() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("myFrame"));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(secondFrame));
         return this;
     }
 
@@ -82,7 +77,7 @@ public class CalculatorPage extends AbstractPage{
         return this;
     }
 
-    public CalculatorPage fillInstances(String  numberOfInstances) {
+    public CalculatorPage fillInstances(String numberOfInstances) {
         selectInstances.sendKeys(numberOfInstances);
         return this;
     }
@@ -173,15 +168,10 @@ public class CalculatorPage extends AbstractPage{
         return estimatedCostResult.getText();
     }
 
-    public CalculatorPage sendEmail() {
+    public CalculatorPage sendEmail(String email) {
         wait.until(ExpectedConditions.elementToBeClickable(buttonEmailEstimate)).click();
         wait.until(ExpectedConditions.elementToBeClickable(fieldForEmail)).click();
-        try {
-            String email = (String) Toolkit.getDefaultToolkit().getSystemClipboard().getData(DataFlavor.stringFlavor);
-            fieldForEmail.sendKeys(email);
-        } catch (UnsupportedFlavorException | IOException e) {
-            e.printStackTrace();
-        }
+        fieldForEmail.sendKeys(email);
         wait.until(ExpectedConditions.elementToBeClickable(buttonSendEmail)).click();
         return this;
     }

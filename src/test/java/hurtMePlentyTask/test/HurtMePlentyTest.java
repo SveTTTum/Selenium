@@ -7,12 +7,14 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.awt.datatransfer.UnsupportedFlavorException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class HurtMePlentyTest extends AbstractTest {
 
     @Test()
-    public void setDataOnPage() {
+    public void setDataOnPage() throws IOException, UnsupportedFlavorException {
         String textForSearchCalculator = "Google Cloud Platform Pricing Calculator";
 
         CalculatorPage pageHome = new CloudGoogleHomePage(driver)
@@ -43,19 +45,22 @@ public class HurtMePlentyTest extends AbstractTest {
         softAssert.assertAll();
 
         String totalCostFromCalculatorPage = pageHome.getTotalCost();
+        String sumOnlyFromTotalCost = totalCostFromCalculatorPage.substring(totalCostFromCalculatorPage.indexOf(":") + 2, totalCostFromCalculatorPage.indexOf("per") - 1);
 
-        ((JavascriptExecutor)driver).executeScript("window.open()");
+        ((JavascriptExecutor) driver).executeScript("window.open()");
         ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
         driver.switchTo().window(tabs.get(1));
 
         TenMinuteMailPage tenMinuteMailPage = new TenMinuteMailPage(driver);
         tenMinuteMailPage.openPage()
-                .getRandomEmail();
+                .saveEmailInBuffer();
+
+        String emailFromBuffer = tenMinuteMailPage.getRandomEmail();
 
         driver.switchTo().window(tabs.get(0));
 
         pageHome.goToCalculatorFrame()
-                .sendEmail();
+                .sendEmail(emailFromBuffer);
 
         driver.switchTo().window(tabs.get(1));
 
@@ -64,6 +69,6 @@ public class HurtMePlentyTest extends AbstractTest {
 
         String totalCostFromLetter = tenMinuteMailPage.getTotalSumFromLetter();
 
-        softAssert.assertTrue(totalCostFromCalculatorPage.contains(totalCostFromLetter));
+        softAssert.assertTrue(sumOnlyFromTotalCost.equals(totalCostFromLetter));
     }
 }
