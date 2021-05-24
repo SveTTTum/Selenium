@@ -2,8 +2,12 @@ package hurtMePlentyTask.test;
 
 import hurtMePlentyTask.page.CalculatorPage;
 import hurtMePlentyTask.page.CloudGoogleHomePage;
+import hurtMePlentyTask.page.TenMinuteMailPage;
+import org.openqa.selenium.JavascriptExecutor;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import java.util.ArrayList;
 
 public class HurtMePlentyTest extends AbstractTest {
 
@@ -15,17 +19,18 @@ public class HurtMePlentyTest extends AbstractTest {
                 .openPage()
                 .getSearchResults(textForSearchCalculator)
                 .getPage()
+                .goToCalculatorFrame()
                 .activateComputeEngine()
                 .fillInstances("4")
                 .chooseInstancesFor("")
-                .chooseOperatingSystemOrSoftware()
-                .chooseMachineClass()
-                .chooseSeries()
-                .chooseMachineType()
-                .fillAllFieldsGPUs()
-                .chooseLocalSSD()
-                .chooseDatacenterLocation()
-                .chooseCommitedUsage()
+                .chooseOperatingSystemOrSoftware("Free: Debian, CentOS, CoreOS, Ubuntu, or other User Provided OS")
+                .chooseMachineClass("Regular")
+                .chooseSeries("N1")
+                .chooseMachineType("n1-standard-8 (vCPUs: 8, RAM: 30GB)")
+                .fillAllFieldsGPUs(1, "NVIDIA Tesla V100")
+                .chooseLocalSSD("2x375 GB")
+                .chooseDatacenterLocation("Frankfurt")
+                .chooseCommitedUsage("1 Year")
                 .clickButtonAddToEstimate();
 
         SoftAssert softAssert = new SoftAssert();
@@ -34,11 +39,31 @@ public class HurtMePlentyTest extends AbstractTest {
         softAssert.assertEquals(pageHome.getRegion(), "Region: Frankfurt");
         softAssert.assertEquals(pageHome.getLocalSSD(), "Total available local SSD space 2x375 GiB");
         softAssert.assertEquals(pageHome.getCommitmentTerm(), "Commitment term: 1 Year");
-        softAssert.assertEquals(pageHome.getEstimatedComponentCost(), "Estimated Component Cost: USD 1,082.77 per 1 month");
+        softAssert.assertEquals(pageHome.getTotalCost(), "Estimated Component Cost: USD 1,082.77 per 1 month");
         softAssert.assertAll();
 
-        pageHome.sendEmail()
-                .openLetter();
-        softAssert.assertTrue(pageHome.getEstimatedComponentCost().contains((CharSequence) pageHome.getTotalSumFromLetter()));
+        String totalCostFromCalculatorPage = pageHome.getTotalCost();
+
+        ((JavascriptExecutor)driver).executeScript("window.open()");
+        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
+        driver.switchTo().window(tabs.get(1));
+
+        TenMinuteMailPage tenMinuteMailPage = new TenMinuteMailPage(driver);
+        tenMinuteMailPage.openPage()
+                .getRandomEmail();
+
+        driver.switchTo().window(tabs.get(0));
+
+        pageHome.goToCalculatorFrame()
+                .sendEmail();
+
+        driver.switchTo().window(tabs.get(1));
+
+        tenMinuteMailPage.openLetter()
+                .getTotalSumFromLetter();
+
+        String totalCostFromLetter = tenMinuteMailPage.getTotalSumFromLetter();
+
+        softAssert.assertTrue(totalCostFromCalculatorPage.contains(totalCostFromLetter));
     }
 }

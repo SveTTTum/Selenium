@@ -16,61 +16,68 @@ public class CalculatorPage extends AbstractPage{
 
     @FindBy(xpath = "//md-tab-item[@class='md-tab ng-scope ng-isolate-scope md-ink-ripple md-active']//descendant::div[@class='hexagon-in2']")
     private WebElement buttonActivateComputeEngine;
-
     @FindBy(xpath = "//md-input-container/child::input[@ng-model='listingCtrl.computeServer.quantity']")
     private WebElement selectInstances;
-
     @FindBy(xpath = "//input[@id='input_67']")
     private  WebElement fieldInstancesFor;
-
     @FindBy(xpath = "//md-checkbox[@ng-model='listingCtrl.computeServer.addGPUs']/div[@class='md-container md-ink-ripple']")
     private WebElement addGPUs;
-
     @FindBy(xpath = "//md-card-content[@id='resultBlock']//button[@id='email_quote']")
-    WebElement buttonEmailEstimate;
-
+    private WebElement buttonEmailEstimate;
     @FindBy(xpath = "//div[@class='md-dialog-container ng-scope']//md-input-container//label[contains(text(), 'Email')]//following-sibling::input")
-    WebElement fieldForEmail;
-
+    private WebElement fieldForEmail;
     @FindBy(xpath = "//md-dialog-actions[@class='layout-row']//button[@class='md-raised md-primary cpc-button md-button md-ink-ripple']")
-    WebElement buttonSendEmail;
-
+    private WebElement buttonSendEmail;
     @FindBy(xpath = "//input[@id='mail_address']")
-    WebElement emailBy;
+    private WebElement emailBy;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_59']")
+    private WebElement buttonForChooseOperatingSystem;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_60']")
+    private WebElement buttonForChooseMachineClass;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_62']")
+    private WebElement buttonForChooseSeries;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_63']")
+    private WebElement buttonForChooseMachineType;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_408']")
+    private WebElement buttonForChooseGPUsNumber;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_409']")
+    private WebElement buttonForChooseGPUsType;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_370']")
+    private WebElement buttonForChooseLocalSSD;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_64']")
+    private WebElement buttonForChooseDatacenterLocation;
+    @FindBy(xpath = "//md-select-value[@id='select_value_label_65']")
+    private WebElement buttonForChooseCommitedUsage;
+    @FindBy(xpath = "//div[contains(@layout-align, 'end start')]/button[not(@disabled='disabled')]")
+    private WebElement buttonForAddToEstimate;
+    @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'VM class: ')]")
+    private WebElement vmClassResult;
+    @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy']//div[contains(text(), 'Instance type: ')]")
+    private WebElement instanceTypeResult;
+    @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy']//div[contains(text(), 'Region: ')]")
+    private WebElement regionResult;
+    @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Total available local SSD space ')]")
+    private WebElement localSSDResult;
+    @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Commitment term: ')]")
+    private WebElement commitmentTermResult;
+    @FindBy(xpath = "//md-list-item[@class='md-1-line md-no-proxy']/div[@class='md-list-item-text']/b[@class='ng-binding']")
+    private WebElement estimatedCostResult;
 
-    @FindBy(xpath = "//div[@class='message_top']")
-    WebElement buttonOpenLetter;
-
-    String xpathfield = "//md-select-value[@id='select_value_label_%s']";
-    String xpathElementOfField = "//md-option[@id='select_option_%s']//child::div";
+    String xpathElementOfField = "//div[contains(@class, 'md-select-menu-container md-active')]//div[contains(@class, 'md-text') and contains(text(), '%s')]";
 
     private By firstFrame = By.xpath("//iframe[starts-with(@name, 'goog_')]");
-    private By operatingSystem = By.xpath(String.format(xpathElementOfField, 68));
-    private By machineClass = By.xpath(String.format(xpathElementOfField, 81));
-    private By series = By.xpath(String.format(xpathElementOfField, 195));
-    private By machineType = By.xpath(String.format(xpathElementOfField, 376));
-    private By GPUsNumber = By.xpath(String.format(xpathElementOfField, 415));
-    private By GPUsType = By.xpath(String.format(xpathElementOfField, 422));
-    private By localSSD = By.xpath(String.format(xpathElementOfField, 397));
-    private By datacenterLocation = By.xpath(String.format(xpathElementOfField, 212));
-    private By commitedUsage = By.xpath(String.format(xpathElementOfField, 100));
-    private By buttonForAddToEstimate = By.xpath("//form[@class='ng-scope ng-valid-min ng-valid-max ng-dirty ng-valid-number ng-valid ng-valid-required ng-valid-parse']/div[15]/button");
-    private By vmClassResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'VM class: ')]");
-    private By InstanceTypeResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']//div[contains(text(), 'Instance type: ')]");
-    private By regionResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']//div[contains(text(), 'Region: ')]");
-    private By localSSDResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Total available local SSD space ')]");
-    private By commitmentTermResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy ng-scope']//div[contains(text(), 'Commitment term: ')]");
-    private By estimatedComponentCostResultBy = By.xpath("//md-list-item[@class='md-1-line md-no-proxy']/div[@class='md-list-item-text']/b");
-    private By totalEstimatedMonthlyCost = By.xpath("//tr[@id='mobilepadding']//td[2]/h3");
 
     public CalculatorPage (WebDriver driver) {
         super(driver);
     }
 
+    public CalculatorPage goToCalculatorFrame() {
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(firstFrame));
+        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt("myFrame"));
+        return this;
+    }
+
     public CalculatorPage activateComputeEngine() {
-        WebElement firstFrameBy = driver.findElement(firstFrame);
-        driver.switchTo().frame(firstFrameBy);
-        driver.switchTo().frame("myFrame");
         wait.until(ExpectedConditions.elementToBeClickable(buttonActivateComputeEngine)).click();
         return this;
     }
@@ -86,63 +93,54 @@ public class CalculatorPage extends AbstractPage{
         return this;
     }
 
-    public CalculatorPage chooseOperatingSystemOrSoftware() {
-        WebElement buttonForChooseOperatingSystem = driver.findElement(By.xpath(String.format(xpathfield, 59)));
-        buttonForChooseOperatingSystem.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(operatingSystem)).click();
+    public CalculatorPage chooseOperatingSystemOrSoftware(String systemName) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseOperatingSystem)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, systemName)))).click();
         return this;
     }
 
-    public CalculatorPage chooseMachineClass() {
-        WebElement buttonForChooseOperatingSystem = driver.findElement(By.xpath(String.format(xpathfield, 60)));
-        buttonForChooseOperatingSystem.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(machineClass)).click();
+    public CalculatorPage chooseMachineClass(String className) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseMachineClass)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, className)))).click();
         return this;
     }
 
-    public CalculatorPage chooseSeries() {
-        WebElement buttonForChooseSeries = driver.findElement(By.xpath(String.format(xpathfield, 62)));
-        buttonForChooseSeries.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(series)).click();
+    public CalculatorPage chooseSeries(String seriesName) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseSeries)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, seriesName)))).click();
         return this;
     }
 
-    public CalculatorPage chooseMachineType() {
-        WebElement buttonForChooseMachineType = driver.findElement(By.xpath(String.format(xpathfield, 63)));
-        buttonForChooseMachineType.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(machineType)).click();
+    public CalculatorPage chooseMachineType(String machineTypeName) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseMachineType)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, machineTypeName)))).click();
         return this;
     }
 
-    public CalculatorPage fillAllFieldsGPUs() {
-        addGPUs.click();
-        WebElement buttonForChooseGPUsNumber = driver.findElement(By.xpath(String.format(xpathfield, 408)));
-        buttonForChooseGPUsNumber.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(GPUsNumber)).click();
-        WebElement buttonForChooseGPUsType = driver.findElement(By.xpath(String.format(xpathfield, 409)));
-        buttonForChooseGPUsType.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(GPUsType)).click();
+    public CalculatorPage fillAllFieldsGPUs(int numberGPUs, String typeGPUs) {
+        wait.until(ExpectedConditions.elementToBeClickable(addGPUs)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseGPUsNumber)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, numberGPUs)))).click();
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseGPUsType)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, typeGPUs)))).click();
         return this;
     }
 
-    public CalculatorPage chooseLocalSSD() {
-        WebElement buttonForChooseLocalSSD = driver.findElement(By.xpath(String.format(xpathfield, 370)));
-        buttonForChooseLocalSSD.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(localSSD)).click();
+    public CalculatorPage chooseLocalSSD(String localSSD) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseLocalSSD)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, localSSD)))).click();
         return this;
     }
 
-    public CalculatorPage chooseDatacenterLocation() {
-        WebElement buttonForChooseDatacenterLocation = driver.findElement(By.xpath(String.format(xpathfield, 64)));
-        buttonForChooseDatacenterLocation.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(datacenterLocation)).click();
+    public CalculatorPage chooseDatacenterLocation(String centerLocation) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseDatacenterLocation)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath(String.format(xpathElementOfField, centerLocation)))).click();
         return this;
     }
 
-    public CalculatorPage chooseCommitedUsage() {
-        WebElement buttonForChooseCommitedUsage = driver.findElement(By.xpath(String.format(xpathfield, 65)));
-        buttonForChooseCommitedUsage.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(commitedUsage)).click();
+    public CalculatorPage chooseCommitedUsage(String commitedUsage) {
+        wait.until(ExpectedConditions.elementToBeClickable(buttonForChooseCommitedUsage)).click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath(String.format(xpathElementOfField, commitedUsage)))).click();
         return this;
     }
 
@@ -152,44 +150,30 @@ public class CalculatorPage extends AbstractPage{
     }
 
     public String getVMClassResult() {
-        return driver.findElement(vmClassResultBy).getText();
+        return vmClassResult.getText();
     }
 
     public String getInstanceType() {
-        return driver.findElement(InstanceTypeResultBy).getText();
+        return instanceTypeResult.getText();
     }
 
     public String getRegion() {
-        return driver.findElement(regionResultBy).getText();
+        return regionResult.getText();
     }
 
     public String getLocalSSD() {
-        return driver.findElement(localSSDResultBy).getText();
+        return localSSDResult.getText();
     }
+
     public String getCommitmentTerm() {
-        return driver.findElement(commitmentTermResultBy).getText();
+        return commitmentTermResult.getText();
     }
 
-    public String getEstimatedComponentCost() {
-        return driver.findElement(estimatedComponentCostResultBy).getText();
+    public String getTotalCost() {
+        return estimatedCostResult.getText();
     }
-
-    //8. Выбрать пункт EMAIL ESTIMATE
-    //9. В новой вкладке открыть https://10minutemail.com или аналогичный сервис для генерации временных email'ов
-    //10. Скопировать почтовый адрес сгенерированный в 10minutemail
-    //11. Вернуться в калькулятор, в поле Email ввести адрес из предыдущего пункта
-    //12. Нажать SEND EMAIL
 
     public CalculatorPage sendEmail() {
-        ((JavascriptExecutor)driver).executeScript("window.open()");
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        driver.get("https://10minutemail.com/");
-        driver.findElement(By.xpath("//div[@id='copy_address']/span")).click();
-        driver.switchTo().window(tabs.get(0));
-        WebElement firstFrameBy = driver.findElement(firstFrame);
-        driver.switchTo().frame(firstFrameBy);
-        driver.switchTo().frame("myFrame");
         wait.until(ExpectedConditions.elementToBeClickable(buttonEmailEstimate)).click();
         wait.until(ExpectedConditions.elementToBeClickable(fieldForEmail)).click();
         try {
@@ -201,23 +185,4 @@ public class CalculatorPage extends AbstractPage{
         wait.until(ExpectedConditions.elementToBeClickable(buttonSendEmail)).click();
         return this;
     }
-
-    //13. Дождаться письма с рассчетом стоимости и
-    // проверить что Total Estimated Monthly Cost в письме совпадает с тем, что отображается в калькуляторе
-
-    public CalculatorPage openLetter() {
-        By quantityLettersBy = By.xpath("//span[@id='inbox_count_number']");
-        ArrayList<String> tabs = new ArrayList<String>(driver.getWindowHandles());
-        driver.switchTo().window(tabs.get(1));
-        wait.until(ExpectedConditions.textToBe(quantityLettersBy, "1"));
-        wait.until(ExpectedConditions.elementToBeClickable(buttonOpenLetter)).click();
-        return this;
-    }
-
-    public CalculatorPage getTotalSumFromLetter() {
-        driver.findElement(totalEstimatedMonthlyCost).getText();
-        return this;
-    }
-
-
 }
